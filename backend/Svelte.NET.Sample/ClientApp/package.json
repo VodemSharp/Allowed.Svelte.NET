@@ -1,0 +1,23 @@
+{
+  "name": "clientapp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev:client": "vite --watch build --outDir ../wwwroot/app --emptyOutDir",
+    "dev:server": "vite --watch build --outDir ../Scripts --ssr src/prerender.ts --emptyOutDir",
+    "build:client": "vite build --outDir ../wwwroot/app --emptyOutDir",
+    "build:server": "vite build --outDir ../Scripts --ssr src/prerender.ts --emptyOutDir",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.0.3",
+    "@tsconfig/svelte": "^3.0.0",
+    "svelte": "^3.55.1",
+    "svelte-check": "^3.0.4",
+    "svelte-preprocess": "^5.0.1",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4"
+  }
+}

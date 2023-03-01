@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Jering.Javascript.NodeJS" Version="6.3.1" />
+      <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    </ItemGroup>
+
+</Project>
