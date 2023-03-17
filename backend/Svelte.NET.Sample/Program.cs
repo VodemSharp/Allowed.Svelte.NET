@@ -29,6 +29,7 @@ app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 await app.BuildRouter();
 await app.RunWatchAll();

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 using Svelte.NET.Attributes;
+using Svelte.NET.Models;
 using Svelte.NET.Options;
 
 namespace Svelte.NET.Services.SvelteRouterServices;
@@ -17,6 +18,11 @@ public class SvelteRouterService : ISvelteRouterService
         _options = options.Value;
     }
 
+    private static string GetComponentName(string path)
+    {
+        return path.Split("/").Last().Replace(".svelte", "");
+    }
+
     public async Task BuildRouter()
     {
         var importBuilder = new StringBuilder();
@@ -30,6 +36,8 @@ public class SvelteRouterService : ISvelteRouterService
             .Where(m => m.GetCustomAttributes(typeof(SvelteRouteAttribute), false).Length > 0)
             .ToArray();
 
+        var routes = new List<RouteData>();
+
         foreach (var method in methods)
         {
             var attributes = method.GetCustomAttributes(typeof(SvelteRouteAttribute), false)
@@ -37,13 +45,61 @@ public class SvelteRouterService : ISvelteRouterService
 
             foreach (var attribute in attributes)
             {
-                var componentName = attribute.ComponentName ?? attribute.Page;
+                var page = attribute.Page;
+                var template = attribute.Template;
+                var layout = attribute.Layout;
 
-                importBuilder.AppendLine(
-                    $"import {componentName} from '../{_options.PagesDirectory}/{attribute.Page}.svelte';");
-                routesBuilder.AppendLine(
-                    $"    '{attribute.Template}': {componentName},");
+                template = template.First() == '/' ? template : $"/{template}";
+                template = template.Last() == '/' && template.Length != 1 ? template[..^1] : template;
+
+                routes.Add(new RouteData
+                {
+                    Template = template,
+                    Page = page.StartsWith("/") ? page : $"./{_options.PagesDirectory}/{page}.svelte",
+                    Layout = string.IsNullOrEmpty(layout) || layout.StartsWith("/")
+                        ? layout
+                        : $"./{_options.LayoutsDirectory}/{layout}.svelte"
+                });
             }
+        }
+
+        var importPath = routes.SelectMany(r => new[]
+            {
+                r.Page,
+                r.Layout
+            }).Where(r => !string.IsNullOrEmpty(r))
+            .Cast<string>().Distinct().OrderBy(p => p).ToList();
+
+        var imports = new Dictionary<string, string>();
+
+        var lastPage = "";
+        var counter = 2;
+
+        foreach (var path in importPath)
+        {
+            var pageName = GetComponentName(path);
+            if (pageName == lastPage)
+            {
+                imports.Add(path, $"{pageName}{counter}");
+                counter++;
+            }
+            else
+            {
+                imports.Add(path, pageName);
+                lastPage = pageName;
+                counter = 2;
+            }
+        }
+
+        foreach (var (path, name) in imports)
+            importBuilder.AppendLine($"import {name} from '{path}';");
+
+        importBuilder.AppendLine("import {RouteData} from '@dev/svelte-dotnet';");
+
+        foreach (var route in routes)
+        {
+            var layoutPart = string.IsNullOrEmpty(route.Layout) ? "" : $", {imports[route.Layout]}";
+            routesBuilder.AppendLine($"    '{route.Template}': new RouteData({imports[route.Page]}{layoutPart}),");
         }
 
         var routerPath = Path.Combine(_environment.ContentRootPath, _options.RouterPath);

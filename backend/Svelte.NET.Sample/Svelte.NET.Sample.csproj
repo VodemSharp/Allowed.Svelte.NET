@@ -15,8 +15,4 @@
       <ProjectReference Include="..\Svelte.NET\Svelte.NET.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="ClientApp\src\routers" />
-    </ItemGroup>
-
 </Project>

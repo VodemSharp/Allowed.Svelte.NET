@@ -47,12 +47,24 @@ public class SvelteView : IActionResult
     protected static Task ProcessResponseData(ActionContext context)
     {
         context.HttpContext.Response.ContentType = "text/html";
-        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+        return Task.CompletedTask;
+    }
+
+    protected static Task ProcessApiResponseData(ActionContext context)
+    {
+        context.HttpContext.Response.ContentType = "application/json";
         return Task.CompletedTask;
     }
 
     public virtual async Task ExecuteResultAsync(ActionContext context)
     {
+        if (context.HttpContext.Request.Headers["svdn-data-only"] == "1")
+        {
+            await ProcessApiResponseData(context);
+            await context.HttpContext.Response.WriteAsync("{}");
+            return;
+        }
+
         await ProcessResponseData(context);
         await context.HttpContext.Response.WriteAsync(await GetNotTypedResponseText(context));
     }
@@ -75,9 +87,14 @@ public class SvelteView<T> : SvelteView
         _ssrData = ssrData;
     }
 
+    private string GetSerializedData(T data)
+    {
+        return JsonSerializer.Serialize<object>(data, _options);
+    }
+
     private async Task<string> GetTypedResponseText(ActionContext context)
     {
-        var ssrData = JsonSerializer.Serialize<object>(_ssrData, _options);
+        var ssrData = GetSerializedData(_ssrData);
         var result = await GetResponseText(context, ssrData);
 
         result = result.Replace("%svelte.state%", $"<script>window.SVELTE_DOT_NET_STATE = {ssrData}</script>");
@@ -87,6 +104,13 @@ public class SvelteView<T> : SvelteView
 
     public override async Task ExecuteResultAsync(ActionContext context)
     {
+        if (context.HttpContext.Request.Headers["svdn-data-only"] == "1")
+        {
+            await ProcessApiResponseData(context);
+            await context.HttpContext.Response.WriteAsync(GetSerializedData(_ssrData));
+            return;
+        }
+
         await ProcessResponseData(context);
         await context.HttpContext.Response.WriteAsync(await GetTypedResponseText(context));
     }
