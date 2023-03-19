@@ -1,5 +1,6 @@
 using Jering.Javascript.NodeJS;
 using Svelte.NET;
+using Svelte.NET.ActionResults;
 
 var builder = WebApplication.CreateBuilder(args);
 

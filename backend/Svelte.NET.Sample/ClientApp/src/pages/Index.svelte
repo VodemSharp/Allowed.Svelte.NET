@@ -2,6 +2,7 @@
     import svelteLogo from '../assets/svelte.svg';
     import Counter from "../lib/Counter.svelte";
     import {url} from "../stores/RouterStores";
+    import {PageTitle} from "@dev/svelte-dotnet";
 
     export let counter: number;
 
@@ -10,6 +11,7 @@
     }
 </script>
 
+<PageTitle value="Index" />
 <main>
     <div>
         <a href="https://vitejs.dev" target="_blank">

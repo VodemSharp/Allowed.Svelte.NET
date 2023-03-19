@@ -1,19 +1,31 @@
 ﻿<script lang="ts">
-    import {page, url} from "../stores/RouterStores";
+    import {page} from "../stores/RouterStores";
     import {onMount} from "svelte";
+    import {PageTitle} from "@dev/svelte-dotnet";
+    import {AboutDto} from "../models/AboutDto";
 
-    function goToIndex() {
-        url.navigate('/');
-    }
-
+    $: data = <AboutDto>$page.data;
+    
     onMount(async () => {
         if (page.isDataEmpty()) await page.updateData();
     });
 </script>
 
-<p>About</p>
-<p><a href="/">Index link</a></p>
-<button on:click={goToIndex}>Go to Index</button>
-{#if $page.data}
-    <p>{$page.data.text}</p>
-{/if}
+<PageTitle value="About"/>
+
+<main>
+    <h1>About</h1>
+
+    <p></p>
+    {#if data && data.text}
+        <p>Data: {data.text}</p>
+    {/if}
+    
+    <p>
+        <a href="/">Index link</a>
+    </p>
+</main>
+
+<style>
+    
+</style>

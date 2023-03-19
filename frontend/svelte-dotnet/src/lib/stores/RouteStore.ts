@@ -1,6 +1,6 @@
 import {writable} from "svelte/store";
 import type {Readable} from "svelte/store";
-import {routerService} from "../services/RouteService";
+import {routerService} from "../services/RouterService";
 import type {RouteData} from "../models/RouteData";
 
 export class RouteStoreData {

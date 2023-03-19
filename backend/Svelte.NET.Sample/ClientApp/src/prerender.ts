@@ -6,5 +6,5 @@ const ServerApp = <unknown>App as ServerSideComponent;
 
 export async function render(url, props) {
     createStores(url, props);
-    return ServerApp.render({url, ssrData: props});
+    return ServerApp.render();
 }

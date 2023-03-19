@@ -7,9 +7,6 @@ namespace Svelte.NET.Sample.Controllers;
 [Route("/errors")]
 public class ErrorController : ControllerBase
 {
-    [SvelteRoute("404", "shared/NotFound")]
-    public async Task<SvelteView> Error()
-    {
-        return new SvelteView();
-    }
+    [Route("404")]
+    public SvelteView Error() => new();
 }

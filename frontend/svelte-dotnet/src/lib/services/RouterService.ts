@@ -1,8 +1,12 @@
 import {numberTypes} from "../constants/NumberType";
 
-export class RouteService {
+export class RouterService {
     isParameter(x: string) {
         return x[0] == '{' && x[x.length - 1] == '}';
+    }
+
+    removeQuestionMark(parameter: string) {
+        return parameter.split('?').join('');
     }
 
     countNecessaryParts(route: string[]) {
@@ -25,7 +29,7 @@ export class RouteService {
     getParameterParts(routePart: string) {
         const parameter = routePart.substring(1, routePart.length - 1);
         const parameterParts = parameter.split(':');
-        const type = parameterParts.length == 2 ? parameterParts[1].replace('?', '') : undefined;
+        const type = parameterParts.length == 2 ? this.removeQuestionMark(parameterParts[1]) : undefined;
         return {parameterParts, type};
     }
 
@@ -107,12 +111,15 @@ export class RouteService {
                 const {parameterParts, type} = this.getParameterParts(routePart);
 
                 if (parameterParts[0][0] == '*') {
-                    result[parameterParts[0].substring(1)] = i < parts.length ? parts.slice(i).join('/') : undefined;
+                    const parameterName = this.removeQuestionMark(parameterParts[0].substring(1));
+                    result[parameterName] = i < parts.length ? parts.slice(i).join('/') : undefined;
                 } else {
+                    const parameterName = this.removeQuestionMark(parameterParts[0]);
+
                     if (numberTypes.some(t => t.name == type))
-                        result[parameterParts[0]] = i < parts.length ? Number(parts[i]) : 0;
+                        result[parameterName] = i < parts.length ? Number(parts[i]) : 0;
                     else
-                        result[parameterParts[0]] = i < parts.length ? parts[i] : undefined;
+                        result[parameterName] = i < parts.length ? parts[i] : undefined;
                 }
             }
         }
@@ -121,4 +128,4 @@ export class RouteService {
     }
 }
 
-export const routerService = new RouteService();
+export const routerService = new RouterService();

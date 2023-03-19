@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {routerService} from "../../services/RouteService";
+    import {routerService} from "../../services/RouterService";
     import {RouteStoreData} from "../../stores/RouteStore";
 
     export let defaultLayout: object;

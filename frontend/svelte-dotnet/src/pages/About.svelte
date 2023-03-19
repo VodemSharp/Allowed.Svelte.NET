@@ -1,10 +1,2 @@
-<script lang="ts">
-    import {onMount} from "svelte";
-    import {page} from "../stores/RouterStores";
-
-    onMount(async () => {
-        // if (page.isDataEmpty()) await page.updateData();
-    });
-</script>
-
-About
+<p>About</p>
+<p><a rel="external" href="/">Index</a></p>

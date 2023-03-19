@@ -1,9 +1,8 @@
 <script lang="ts">
-    import {Router} from "@dev/svelte-dotnet";
-    import {RouteView} from "@dev/svelte-dotnet";
+    import {Router, RouteView, PageTitle, LayoutView} from "@dev/svelte-dotnet";
+    import {} from "@dev/svelte-dotnet";
     import {url, route} from "./stores/RouterStores";
     import MainLayout from "./layouts/MainLayout.svelte";
-    import NotFound from "./pages/shared/NotFound.svelte";
 </script>
 
 <Router route="{$route}">
@@ -11,6 +10,9 @@
         <RouteView route="{$route}" url="{$url}" defaultLayout="{MainLayout}"/>
     </div>
     <div slot="not-found">
-        <NotFound/>
+        <PageTitle value="Not found"/>
+        <LayoutView layout="{MainLayout}">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
     </div>
 </Router>

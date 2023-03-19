@@ -229,9 +229,12 @@ const numberTypes = [
   new NumberType("double", -17976931348623157e292, 17976931348623157e292, true),
   new NumberType("decimal", -7922816251426434e13, 7922816251426434e13, true)
 ];
-class RouteService {
+class RouterService {
   isParameter(x) {
     return x[0] == "{" && x[x.length - 1] == "}";
+  }
+  removeQuestionMark(parameter) {
+    return parameter.split("?").join("");
   }
   countNecessaryParts(route2) {
     let counter = route2.length;
@@ -248,7 +251,7 @@ class RouteService {
   getParameterParts(routePart) {
     const parameter = routePart.substring(1, routePart.length - 1);
     const parameterParts = parameter.split(":");
-    const type = parameterParts.length == 2 ? parameterParts[1].replace("?", "") : void 0;
+    const type = parameterParts.length == 2 ? this.removeQuestionMark(parameterParts[1]) : void 0;
     return { parameterParts, type };
   }
   isValidType(routePart, value) {
@@ -309,19 +312,21 @@ class RouteService {
       if (this.isParameter(routePart)) {
         const { parameterParts, type } = this.getParameterParts(routePart);
         if (parameterParts[0][0] == "*") {
-          result[parameterParts[0].substring(1)] = i < parts.length ? parts.slice(i).join("/") : void 0;
+          const parameterName = this.removeQuestionMark(parameterParts[0].substring(1));
+          result[parameterName] = i < parts.length ? parts.slice(i).join("/") : void 0;
         } else {
+          const parameterName = this.removeQuestionMark(parameterParts[0]);
           if (numberTypes.some((t) => t.name == type))
-            result[parameterParts[0]] = i < parts.length ? Number(parts[i]) : 0;
+            result[parameterName] = i < parts.length ? Number(parts[i]) : 0;
           else
-            result[parameterParts[0]] = i < parts.length ? parts[i] : void 0;
+            result[parameterName] = i < parts.length ? parts[i] : void 0;
         }
       }
     }
     return result;
   }
 }
-const routerService = new RouteService();
+const routerService = new RouterService();
 class RouteStoreData {
   constructor(path = void 0, route2 = void 0) {
     __publicField(this, "path");
@@ -454,23 +459,32 @@ function createUrlStore(ssrUrl) {
   };
 }
 const IndexLayout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<div class="${"index-layout"}">${slots.default ? slots.default({}) : ``}</div>`;
+  return `${validate_component(PageTitle, "PageTitle").$$render($$result, { value: "Svelte.NET" }, {}, {})}
+
+<div class="${"index-layout"}">${slots.default ? slots.default({}) : ``}</div>`;
 });
 const About = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let data;
   let $page, $$unsubscribe_page;
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
+  data = $page.data;
   $$unsubscribe_page();
-  return `<p>About</p>
-<p><a href="${"/"}">Index link</a></p>
-<button>Go to Index</button>
-${$page.data ? `<p>${escape($page.data.text)}</p>` : ``}`;
+  return `${validate_component(PageTitle, "PageTitle").$$render($$result, { value: "About" }, {}, {})}
+
+<main><h1>About</h1>
+
+    <p></p>
+    ${data && data.text ? `<p>Data: ${escape(data.text)}</p>` : ``}
+    
+    <p><a href="${"/"}">Index link</a></p>
+</main>`;
 });
 const svelteLogo = "/app/assets/svelte-a39f39b7.svg";
 const Counter = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { counter = 0 } = $$props;
   if ($$props.counter === void 0 && $$bindings.counter && counter !== void 0)
     $$bindings.counter(counter);
-  return `<button>count is ${escape(counter)}</button>`;
+  return `<button>Count is ${escape(counter)}</button>`;
 });
 const Index_svelte_svelte_type_style_lang = "";
 const css = {
@@ -482,7 +496,8 @@ const Index = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.counter === void 0 && $$bindings.counter && counter !== void 0)
     $$bindings.counter(counter);
   $$result.css.add(css);
-  return `<main><div><a href="${"https://vitejs.dev"}" target="${"_blank"}"><img src="${"/app/vite.svg"}" class="${"logo svelte-141kimj"}" alt="${"Vite Logo"}"></a>
+  return `${validate_component(PageTitle, "PageTitle").$$render($$result, { value: "Index" }, {}, {})}
+<main><div><a href="${"https://vitejs.dev"}" target="${"_blank"}"><img src="${"/app/vite.svg"}" class="${"logo svelte-141kimj"}" alt="${"Vite Logo"}"></a>
         <a href="${"https://svelte.dev"}" target="${"_blank"}"><img${add_attribute("src", svelteLogo, 0)} class="${"logo svelte svelte-141kimj"}" alt="${"Svelte Logo"}"></a>
         <a href="${"https://dotnet.microsoft.com"}" target="${"_blank"}"><img src="${"/app/dotnet.svg"}" class="${"logo svelte-141kimj"}" alt="${"DotNet Logo"}"></a></div>
     <h1>Vite + Svelte + .NET</h1>
@@ -498,19 +513,7 @@ const Index = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     </p>
 </main>`;
 });
-const MainLayout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `<div class="${"main-layout"}">${slots.default ? slots.default({}) : ``}</div>`;
-});
-const NotFound = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${validate_component(PageTitle, "PageTitle").$$render($$result, { value: "Not found" }, {}, {})}
-${validate_component(LayoutView, "LayoutView").$$render($$result, { layout: MainLayout }, {}, {
-    default: () => {
-      return `<p role="${"alert"}">Sorry, there&#39;s nothing at this address.</p>`;
-    }
-  })}`;
-});
 const routes = {
-  "/404": new RouteData(NotFound),
   "/{counter:double?}": new RouteData(Index, IndexLayout),
   "/about": new RouteData(About)
 };
@@ -522,6 +525,11 @@ function createStores(ssrUrl, ssrData) {
   page = createPageStore(ssrData, url);
   route = createRouteStore(routes, url);
 }
+const MainLayout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  return `${validate_component(PageTitle, "PageTitle").$$render($$result, { value: "Svelte.NET" }, {}, {})}
+
+<div class="${"main-layout"}">${slots.default ? slots.default({}) : ``}</div>`;
+});
 const App = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $route, $$unsubscribe_route;
   let $url, $$unsubscribe_url;
@@ -531,7 +539,12 @@ const App = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$unsubscribe_url();
   return `${validate_component(Router, "Router").$$render($$result, { route: $route }, {}, {
     "not-found": () => {
-      return `<div slot="${"not-found"}">${validate_component(NotFound, "NotFound").$$render($$result, {}, {}, {})}</div>`;
+      return `<div slot="${"not-found"}">${validate_component(PageTitle, "PageTitle").$$render($$result, { value: "Not found" }, {}, {})}
+        ${validate_component(LayoutView, "LayoutView").$$render($$result, { layout: MainLayout }, {}, {
+        default: () => {
+          return `<p role="${"alert"}">Sorry, there&#39;s nothing at this address.</p>`;
+        }
+      })}</div>`;
     },
     found: () => {
       return `<div slot="${"found"}">${validate_component(RouteView, "RouteView").$$render(
@@ -550,7 +563,7 @@ const App = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 const ServerApp = App;
 async function render(url2, props) {
   createStores(url2, props);
-  return ServerApp.render({ url: url2, ssrData: props });
+  return ServerApp.render();
 }
 export {
   render

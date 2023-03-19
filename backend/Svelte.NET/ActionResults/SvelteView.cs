@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Jering.Javascript.NodeJS;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -58,7 +57,7 @@ public class SvelteView : IActionResult
 
     public virtual async Task ExecuteResultAsync(ActionContext context)
     {
-        if (context.HttpContext.Request.Headers["svdn-data-only"] == "1")
+        if (context.HttpContext.Request.Headers["Svdn-data-only"] == "1")
         {
             await ProcessApiResponseData(context);
             await context.HttpContext.Response.WriteAsync("{}");
@@ -104,7 +103,7 @@ public class SvelteView<T> : SvelteView
 
     public override async Task ExecuteResultAsync(ActionContext context)
     {
-        if (context.HttpContext.Request.Headers["svdn-data-only"] == "1")
+        if (context.HttpContext.Request.Headers["Svdn-data-only"] == "1")
         {
             await ProcessApiResponseData(context);
             await context.HttpContext.Response.WriteAsync(GetSerializedData(_ssrData));
