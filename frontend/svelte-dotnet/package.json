@@ -1,11 +1,13 @@
 {
-  "name": "@dev/svelte-dotnet",
+  "name": "@allowed/svelte-dotnet",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
     "preview": "vite preview",
-    "package": "svelte-kit sync && svelte-package && publint && copy package-dist.json dist && cd dist && ren package-dist.json package.json",
+    "package": "svelte-kit sync && svelte-package && publint",
+    "package:dev": "npm run package && copy package-dev.json dist && cd dist && ren package-dev.json package.json",
+    "package:prod": "npm run package && copy package-prod.json dist && cd dist && ren package-prod.json package.json",
     "prepublishOnly": "npm run package",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

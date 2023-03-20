@@ -1,2 +1,2 @@
 # Svelte.NET
-The combination of Svelte frontend and .NET backend.
+.NET backend toolkit for Svelte.

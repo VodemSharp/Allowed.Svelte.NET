@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0BF7399E-5B33-4F8D-8050-0ACC93FBDBEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allowed.Svelte.NET", "Allowed.Svelte.NET\Allowed.Svelte.NET.csproj", "{CD613099-4C2B-40D6-9EB1-11CF05FF50F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{B035886D-3698-4E85-A581-2C30F11A4AC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allowed.Svelte.NET.Sample", "Allowed.Svelte.NET.Sample\Allowed.Svelte.NET.Sample.csproj", "{34677447-53AA-459D-8F8F-D84779200522}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8} = {0BF7399E-5B33-4F8D-8050-0ACC93FBDBEE}
+		{34677447-53AA-459D-8F8F-D84779200522} = {B035886D-3698-4E85-A581-2C30F11A4AC2}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34677447-53AA-459D-8F8F-D84779200522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34677447-53AA-459D-8F8F-D84779200522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34677447-53AA-459D-8F8F-D84779200522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34677447-53AA-459D-8F8F-D84779200522}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
