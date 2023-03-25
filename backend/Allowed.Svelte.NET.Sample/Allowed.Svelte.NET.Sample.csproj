@@ -6,13 +6,28 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <Import Project="Targets/Build.targets"/>
+
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.1" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Allowed.Svelte.NET\Allowed.Svelte.NET.csproj" />
+        <ProjectReference Include="..\Allowed.Svelte.NET\Allowed.Svelte.NET.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\app\assets\index-6adf3665.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\app\assets\index-a1e4082f.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\app\assets\svelte-a39f39b7.svg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\app\dotnet.svg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\app\index.html"/>
+        <_ContentIncludedByDefault Remove="wwwroot\app\vite.svg"/>
     </ItemGroup>
 
 </Project>

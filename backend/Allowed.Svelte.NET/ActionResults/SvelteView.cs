@@ -15,9 +15,8 @@ public class SvelteView : IActionResult
         var environment = context.HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
         var nodeJsService = context.HttpContext.RequestServices.GetRequiredService<INodeJSService>();
 
-        var serverRender =
-            (await File.ReadAllTextAsync(Path.Combine(environment.ContentRootPath, "Scripts", "prerender.js")))
-            .Split("export")[0];
+        var serverRender = (await File.ReadAllTextAsync(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scripts",
+                "prerender.js"))).Split("export")[0];
 
         var request = context.HttpContext.Request;
         var url =

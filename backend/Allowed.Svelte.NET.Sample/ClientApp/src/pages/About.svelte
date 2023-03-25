@@ -2,10 +2,10 @@
     import {page} from "../stores/RouterStores";
     import {onMount} from "svelte";
     import {PageTitle} from "@dev/svelte-dotnet";
-    import {AboutDto} from "../models/AboutDto";
+    import type {AboutDto} from "../models/AboutDto";
 
     $: data = <AboutDto>$page.data;
-    
+
     onMount(async () => {
         if (page.isDataEmpty()) await page.updateData();
     });
@@ -16,16 +16,15 @@
 <main>
     <h1>About</h1>
 
-    <p></p>
     {#if data && data.text}
-        <p>Data: {data.text}</p>
+        <p>{data.text}</p>
     {/if}
-    
+
     <p>
-        <a href="/">Index link</a>
+        <a href="/">Go to index</a>
     </p>
 </main>
 
 <style>
-    
+
 </style>

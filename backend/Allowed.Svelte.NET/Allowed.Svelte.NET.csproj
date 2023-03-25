@@ -5,27 +5,26 @@
         <Nullable>enable</Nullable>
         <Authors>VodemSharp</Authors>
         <Description>.NET backend toolkit for Svelte.</Description>
-        <RepositoryUrl>https://github.com/VodemSharp/Svelte.NET</RepositoryUrl>
+        <RepositoryUrl>https://github.com/VodemSharp/Allowed.Svelte.NET</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageVersion>1.0.3</PackageVersion>
         <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
-        <PackageIcon>Images\icon.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Jering.Javascript.NodeJS" Version="6.3.1" />
-      <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+        <None Include="Images\icon.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Images" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Images\icon.png">
-        <Pack>True</Pack>
-        <PackagePath></PackagePath>
-      </None>
+        <PackageReference Include="Jering.Javascript.NodeJS" Version="6.3.1" />
     </ItemGroup>
 
 </Project>

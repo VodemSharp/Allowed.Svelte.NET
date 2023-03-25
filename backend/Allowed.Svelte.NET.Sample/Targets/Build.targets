@@ -1,0 +1,33 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ClientRoot>ClientApp\</ClientRoot>
+        <DefaultItemExcludes>$(DefaultItemExcludes);$(ClientRoot)node_modules\**</DefaultItemExcludes>
+        <ViteRoute>node_modules\.bin\vite</ViteRoute>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Remove="$(ClientRoot)**"/>
+        <None Remove="$(ClientRoot)**"/>
+        <None Include="$(ClientRoot)**" Exclude="$(ClientRoot)node_modules\**"/>
+    </ItemGroup>
+    
+    <Target Name="NpmInstall" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug' And !Exists('$(ClientRoot)node_modules')">
+        <Exec Command="node --version" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+        </Exec>
+        <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE."/>
+        <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..."/>
+        <Exec WorkingDirectory="$(ClientRoot)" Command="npm install"/>
+    </Target>
+
+    <Target Name="BuildRouter" AfterTargets="Build">
+        <Exec Command="svelte-dotnet build -a $(MSBuildProjectDirectory)\bin\$(Configuration)\$(TargetFramework)\Allowed.Svelte.NET.Sample.dll"/>
+    </Target>
+
+    <Target Name="PublishRunVite" AfterTargets="ComputeFilesToPublish">
+        <Exec WorkingDirectory="$(ClientRoot)" Command="npm install"/>
+        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(PublishDir)/wwwroot/app --emptyOutDir"/>
+        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(PublishDir)/scripts --ssr src/prerender.ts --emptyOutDir"/>
+    </Target>
+
+</Project>

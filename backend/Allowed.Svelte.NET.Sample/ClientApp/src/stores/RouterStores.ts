@@ -1,6 +1,6 @@
 ﻿import {createRouteStore, createUrlStore, createPageStore, RouteStoreData} from "@dev/svelte-dotnet";
 import type {UrlStore, PageStore} from "@dev/svelte-dotnet";
-import {routes} from "../routers";
+import {routes} from "../routes";
 import type {Readable} from "svelte/store";
 
 export let url: UrlStore;

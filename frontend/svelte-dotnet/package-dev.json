@@ -1,6 +1,6 @@
 {
-  "name": "@allowed/svelte-dotnet",
-  "version": "1.0.0",
+  "name": "@dev/svelte-dotnet",
+  "version": "0.0.22",
   "peerDependencies": {
     "svelte": "^3.54.0"
   },

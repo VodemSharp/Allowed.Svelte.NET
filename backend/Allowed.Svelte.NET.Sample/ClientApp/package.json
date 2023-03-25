@@ -4,10 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:client": "vite --watch build --outDir ../wwwroot/app --emptyOutDir",
-    "dev:server": "vite --watch build --outDir ../Scripts --ssr src/prerender.ts --emptyOutDir",
-    "build:client": "vite build --outDir ../wwwroot/app --emptyOutDir",
-    "build:server": "vite build --outDir ../Scripts --ssr src/prerender.ts --emptyOutDir",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
@@ -21,6 +17,7 @@
     "vite": "^4.1.4"
   },
   "dependencies": {
-    "@dev/svelte-dotnet": "^0.0.22"
+    "@dev/svelte-dotnet": "^0.0.22",
+    "svelte-dotnet": "^1.0.0"
   }
 }
