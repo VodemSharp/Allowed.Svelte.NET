@@ -1,60 +1,70 @@
 import {writable} from "svelte/store";
 import type {Writable} from "svelte/store";
 import type {UrlStore} from "./UrlStore";
+import {ServerData} from "../models/ServerData";
 
 export class PageStoreData {
     isSSR: boolean = false;
-    isFromSSR: boolean = false;
     href: string = '';
-    data: object = {};
+    data: ServerData = new ServerData();
 
-    constructor(data: object, isFromSSR: boolean) {
-        this.data = data;
-        this.isFromSSR = isFromSSR;
+    constructor(ssrData: ServerData) {
+        this.data = ssrData;
         this.isSSR = typeof window == 'undefined';
     }
 }
 
 export interface PageStore extends Writable<PageStoreData> {
-    isDataEmpty: { (): boolean };
-    updateData: { (): Promise<void> };
+    isDataModelEmpty: { (): boolean };
+    updateDataModel: { (init?: RequestInit): Promise<void> };
+    updateIsEmpty: { (init?: RequestInit): Promise<void> };
 }
 
 export const defaultRequestInit: RequestInit = {
     method: "GET",
     headers: {
-        "Svdn-Data-Only": "1"
+        "svdn-data-only": "1"
     }
 }
 
-export function createPageStore(ssrData: object, url: UrlStore): PageStore {
-    const page = new PageStoreData(ssrData, true);
+export function createPageStore(ssrData: ServerData, url: UrlStore): PageStore {
+    const page = new PageStoreData(ssrData);
     const {subscribe, set, update} = writable<PageStoreData>(page);
 
     url.subscribe(x => {
         update(p => {
-            if (p.href && p.href != x.href)
-                p.data = {};
+            if (p.href && p.href != x.href) {
+                p.data.model = {};
+            }
 
             p.href = x.href;
             return p;
         });
     });
 
+    const isDataModelEmpty = () => {
+        return Object.keys(page.data.model).length == 0;
+    };
+
+    const updateDataModel = async (init: RequestInit = defaultRequestInit) => {
+        const data = await (await fetch(page.href, init)).json();
+
+        update(p => {
+            p.data.model = data;
+            return p;
+        });
+    };
+
+    const updateIsEmpty = async (init: RequestInit = defaultRequestInit) => {
+        if (isDataModelEmpty()) await updateDataModel(init);
+    };
+
     return {
         set,
         subscribe,
         update,
-        isDataEmpty: () => {
-            return Object.keys(page.data).length == 0;
-        },
-        updateData: async (init: RequestInit = defaultRequestInit) => {
-            const data = await (await fetch(page.href, init)).json();
-
-            update(p => {
-                p.data = data;
-                return p;
-            });
-        }
+        isDataModelEmpty,
+        updateDataModel,
+        updateIsEmpty
     };
 }

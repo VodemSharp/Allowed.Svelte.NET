@@ -1,13 +1,15 @@
 ﻿<script lang="ts">
     import {page} from "../stores/RouterStores";
     import {onMount} from "svelte";
-    import {PageTitle} from "@dev/svelte-dotnet";
+    import {PageTitle} from "svelte-dotnet";
     import type {AboutDto} from "../models/AboutDto";
+    import type {AppServerData} from "../models/AppServerData";
 
-    $: data = <AboutDto>$page.data;
+    $: data = <AppServerData>$page.data;
+    $: model = <AboutDto>data.model;
 
     onMount(async () => {
-        if (page.isDataEmpty()) await page.updateData();
+        await page.updateIsEmpty();
     });
 </script>
 
@@ -15,16 +17,9 @@
 
 <main>
     <h1>About</h1>
-
-    {#if data && data.text}
-        <p>{data.text}</p>
-    {/if}
-
+    <p>{model?.text}</p>
+    <p>{data.configuration?.apiConnection}</p>
     <p>
         <a href="/">Go to index</a>
     </p>
 </main>
-
-<style>
-
-</style>

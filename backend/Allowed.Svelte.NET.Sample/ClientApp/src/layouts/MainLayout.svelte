@@ -1,5 +1,5 @@
 ﻿<script>
-    import {PageTitle} from "@dev/svelte-dotnet";
+    import {PageTitle} from "svelte-dotnet";
 </script>
 
 <PageTitle value="Svelte.NET"/>

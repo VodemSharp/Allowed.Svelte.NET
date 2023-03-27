@@ -4,6 +4,7 @@ import {default as LayoutView} from './components/layouts/LayoutView.svelte';
 import {default as Router} from './components/routes/Router.svelte';
 import {default as RouteView} from './components/routes/RouteView.svelte';
 import {RouteData} from "./models/RouteData";
+import {ServerData} from "./models/ServerData";
 import type {PageStore} from "./stores/PageStore";
 import {defaultRequestInit, createPageStore} from "./stores/PageStore";
 import {RouteStoreData, createRouteStore} from "./stores/RouteStore";
@@ -16,6 +17,7 @@ export {
     Router,
     RouteView,
     RouteData,
+    ServerData,
     PageStore,
     RouteStoreData,
     UrlStore,

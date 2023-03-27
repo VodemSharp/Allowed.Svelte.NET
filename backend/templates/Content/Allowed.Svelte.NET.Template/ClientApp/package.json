@@ -17,6 +17,6 @@
     "vite": "^3.1.0"
   },
   "dependencies": {
-    "svelte-dotnet": "^1.0.0"
+    "svelte-dotnet": "^1.0.6"
   }
 }

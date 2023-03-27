@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <PackageId>Allowed.Svelte.NET.Templates</PackageId>
     <Authors>VodemSharp</Authors>
     <Description>Svelte.NET templates.</Description>

@@ -4,10 +4,10 @@
     import {PageTitle} from "svelte-dotnet";
     import type {AboutDto} from "../models/AboutDto";
 
-    $: data = <AboutDto>$page.data;
+    $: data = <AboutDto>$page.data.model;
     
     onMount(async () => {
-        if (page.isDataEmpty()) await page.updateData();
+        await page.updateIsEmpty();
     });
 </script>
 

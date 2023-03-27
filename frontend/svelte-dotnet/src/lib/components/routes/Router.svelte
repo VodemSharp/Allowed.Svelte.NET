@@ -6,13 +6,13 @@
 
     onMount(() => {
         document.addEventListener("click", function (e: Event) {
-            const target = (<HTMLElement>e.target).closest("a");
+            const linkElement = (<HTMLElement>e.target).closest("a");
 
-            if (target) {
-                const href = (<HTMLElement>e.target).getAttribute('href');
-                const target = (<HTMLElement>e.target).getAttribute('target');
+            if (linkElement) {
+                const href = linkElement.getAttribute('href');
+                const target = linkElement.getAttribute('target');
 
-                if (target != '_blank' && (href.startsWith('/') || href.startsWith(window.location.host))) {
+                if (target != '_blank' && href && (href.startsWith('/') || href.startsWith(window.location.host))) {
                     e.preventDefault();
                     history.pushState({}, '', href);
                 }

@@ -6,8 +6,14 @@
     function navigate() {
         url.navigate('/about');
     }
+
+    onMount(() => {
+        console.log(page.isDataModelEmpty());
+    });
 </script>
 
 <PageTitle value="Index"/>
 <p>Index - {$page.isSSR}</p>
-<p><button on:click={navigate}>Navigate</button></p>
+<p>
+    <button on:click={navigate}>Navigate</button>
+</p>

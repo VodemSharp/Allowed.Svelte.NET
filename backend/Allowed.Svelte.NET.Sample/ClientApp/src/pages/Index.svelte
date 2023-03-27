@@ -2,7 +2,7 @@
     import svelteLogo from '../assets/svelte.svg';
     import Counter from "../lib/Counter.svelte";
     import {url} from "../stores/RouterStores";
-    import {PageTitle} from "@dev/svelte-dotnet";
+    import {PageTitle} from "svelte-dotnet";
 
     export let counter: number;
 

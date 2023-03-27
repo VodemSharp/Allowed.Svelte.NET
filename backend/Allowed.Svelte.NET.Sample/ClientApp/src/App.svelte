@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {Router, RouteView, PageTitle, LayoutView} from "@dev/svelte-dotnet";
+    import {Router, RouteView, PageTitle, LayoutView} from "svelte-dotnet";
     import {url, route} from "./stores/RouterStores";
     import MainLayout from "./layouts/MainLayout.svelte";
 </script>

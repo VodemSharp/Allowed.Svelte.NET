@@ -1,11 +1,14 @@
 using Allowed.Svelte.NET;
+using Allowed.Svelte.NET.Sample.Options;
+using Allowed.Svelte.NET.Sample.ServerSide;
 using Jering.Javascript.NodeJS;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddNodeJS();
-builder.Services.AddSvelte();
+builder.Services.AddSvelte()
+    .AddServerSideData(new ConfigurationData<ClientDataOptions>());
 
 var app = builder.Build();
 

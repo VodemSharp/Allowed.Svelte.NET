@@ -3,9 +3,9 @@ using Allowed.Svelte.NET.Options;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace Allowed.Svelte.NET.Services.SvelteServices;
+namespace Allowed.Svelte.NET.Services;
 
-public class SvelteService : ISvelteService
+public class SvelteService
 {
     private readonly Process _watchClientProcess;
     private readonly Process _watchServerProcess;

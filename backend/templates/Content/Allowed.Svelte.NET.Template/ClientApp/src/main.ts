@@ -1,10 +1,11 @@
 import './app.css'
 import App from './App.svelte'
 import {createStores} from "./stores/RouterStores";
+import type {ServerData} from "svelte-dotnet";
 
 declare global {
     interface Window {
-        SVELTE_DOT_NET_STATE: object
+        SVELTE_DOT_NET_STATE: ServerData
     }
 }
 

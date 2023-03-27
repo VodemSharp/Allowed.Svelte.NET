@@ -1,5 +1,6 @@
 ﻿using Allowed.Svelte.NET.Options;
-using Allowed.Svelte.NET.Services.SvelteServices;
+using Allowed.Svelte.NET.ServerSide;
+using Allowed.Svelte.NET.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,26 +14,38 @@ public static class ServicesExtensions
         options ??= _ => { };
 
         services.Configure(options);
-        services.AddTransient<ISvelteService, SvelteService>();
+        services.AddSingleton<ServerSideDataCollection>();
+        services.AddTransient<SvelteService>();
 
+        return services;
+    }
+
+    public static IServiceCollection AddServerSideData(this IServiceCollection services,
+        params IServerSideData[] dataItems)
+    {
+        services.AddSingleton(new ServerSideDataCollection
+        {
+            DataItems = dataItems.ToList()
+        });
+        
         return services;
     }
 
     public static async Task<WebApplication> RunWatchClient(this WebApplication app)
     {
-        await app.Services.GetRequiredService<ISvelteService>().RunWatchClient();
+        await app.Services.GetRequiredService<SvelteService>().RunWatchClient();
         return app;
     }
 
     public static async Task<WebApplication> RunWatchServer(this WebApplication app)
     {
-        await app.Services.GetRequiredService<ISvelteService>().RunWatchServer();
+        await app.Services.GetRequiredService<SvelteService>().RunWatchServer();
         return app;
     }
 
     public static async Task<WebApplication> RunWatchAll(this WebApplication app)
     {
-        await app.Services.GetRequiredService<ISvelteService>().RunWatchAll();
+        await app.Services.GetRequiredService<SvelteService>().RunWatchAll();
         return app;
     }
 }
