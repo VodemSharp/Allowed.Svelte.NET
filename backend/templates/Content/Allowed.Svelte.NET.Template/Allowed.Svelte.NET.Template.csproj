@@ -6,19 +6,31 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
-    <Import Project="Targets/Build.targets"/>
+    <Import Project="Targets/Build.targets" />
 
     <ItemGroup>
-        <PackageReference Include="Allowed.Svelte.NET" Version="1.0.5"/>
+        <PackageReference Include="Allowed.Svelte.NET" Version="1.0.5" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="wwwroot"/>
+        <Folder Include="ClientApp\public" />
+        <Folder Include="wwwroot" />
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="wwwroot\app\dotnet.svg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\app\vite.svg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\app\dotnet.svg" />
+        <_ContentIncludedByDefault Remove="wwwroot\app\vite.svg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="ClientApp\src\assets\img\dotnet.svg">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Include="ClientApp\src\assets\img\vite.svg">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

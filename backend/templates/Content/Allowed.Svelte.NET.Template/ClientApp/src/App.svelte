@@ -2,6 +2,8 @@
   import {Router, RouteView, PageTitle, LayoutView} from "svelte-dotnet";
   import {url, route} from "./stores/RouterStores";
   import MainLayout from "./layouts/MainLayout.svelte";
+  import "./assets/scss/style.scss";
+  import "./assets/fonts/stylesheet.css";
 </script>
 
 <Router route="{$route}">

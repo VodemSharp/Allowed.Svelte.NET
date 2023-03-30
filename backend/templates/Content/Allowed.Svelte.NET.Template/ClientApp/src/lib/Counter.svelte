@@ -6,6 +6,6 @@
     }
 </script>
 
-<button on:click={increment}>
-    Count is {counter}
+<button class="m-btn" on:click={increment}>
+    <span>Count is {counter}</span>
 </button>
