@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Allowed.Svelte.NET.ActionResults;
-using Allowed.Svelte.NET.Attributes;
+﻿using Allowed.Svelte.NET.ActionResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Allowed.Svelte.NET.Sample.Controllers;
 

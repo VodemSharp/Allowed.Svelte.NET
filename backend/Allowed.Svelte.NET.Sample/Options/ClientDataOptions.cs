@@ -2,5 +2,5 @@
 
 public class ClientDataOptions
 {
-    public string? ApiConnection { get; set; }
+    public string? MyData { get; set; }
 }

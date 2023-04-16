@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allowed.Svelte.NET", "Allow
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{B035886D-3698-4E85-A581-2C30F11A4AC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allowed.Svelte.NET.Sample", "Allowed.Svelte.NET.Sample\Allowed.Svelte.NET.Sample.csproj", "{34677447-53AA-459D-8F8F-D84779200522}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{6B98A5DB-6CB0-451D-A7B2-ABDFE492354D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allowed.Svelte.NET.Template", "templates\Content\Allowed.Svelte.NET.Template\Allowed.Svelte.NET.Template.csproj", "{8C29A397-6853-4F88-B9D3-5F1F720A86E8}"
@@ -18,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4D94134D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allowed.Svelte.NET.Tools.Tests", "Allowed.Svelte.NET.Tools.Tests\Allowed.Svelte.NET.Tools.Tests.csproj", "{F7CADB80-8D25-4EE9-80A4-36C31B4FE3B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allowed.Svelte.NET.Sample", "Allowed.Svelte.NET.Sample\Allowed.Svelte.NET.Sample.csproj", "{245D5588-3BB2-41C0-ADFE-5BD0E96F313F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,20 +25,16 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8} = {0BF7399E-5B33-4F8D-8050-0ACC93FBDBEE}
-		{34677447-53AA-459D-8F8F-D84779200522} = {B035886D-3698-4E85-A581-2C30F11A4AC2}
 		{8C29A397-6853-4F88-B9D3-5F1F720A86E8} = {6B98A5DB-6CB0-451D-A7B2-ABDFE492354D}
 		{41E56A6B-1297-4501-82E1-CF828F68116B} = {0BF7399E-5B33-4F8D-8050-0ACC93FBDBEE}
 		{F7CADB80-8D25-4EE9-80A4-36C31B4FE3B1} = {4D94134D-D5B7-4A68-97C3-19A528A0E819}
+		{245D5588-3BB2-41C0-ADFE-5BD0E96F313F} = {B035886D-3698-4E85-A581-2C30F11A4AC2}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD613099-4C2B-40D6-9EB1-11CF05FF50F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34677447-53AA-459D-8F8F-D84779200522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34677447-53AA-459D-8F8F-D84779200522}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34677447-53AA-459D-8F8F-D84779200522}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34677447-53AA-459D-8F8F-D84779200522}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C29A397-6853-4F88-B9D3-5F1F720A86E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8C29A397-6853-4F88-B9D3-5F1F720A86E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C29A397-6853-4F88-B9D3-5F1F720A86E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,5 +47,9 @@ Global
 		{F7CADB80-8D25-4EE9-80A4-36C31B4FE3B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7CADB80-8D25-4EE9-80A4-36C31B4FE3B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7CADB80-8D25-4EE9-80A4-36C31B4FE3B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{245D5588-3BB2-41C0-ADFE-5BD0E96F313F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{245D5588-3BB2-41C0-ADFE-5BD0E96F313F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{245D5588-3BB2-41C0-ADFE-5BD0E96F313F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{245D5588-3BB2-41C0-ADFE-5BD0E96F313F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

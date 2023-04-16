@@ -1,4 +1,5 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
     <PropertyGroup>
         <ClientRoot>ClientApp\</ClientRoot>
         <DefaultItemExcludes>$(DefaultItemExcludes);$(ClientRoot)node_modules\**</DefaultItemExcludes>
@@ -10,7 +11,7 @@
         <None Remove="$(ClientRoot)**"/>
         <None Include="$(ClientRoot)**" Exclude="$(ClientRoot)node_modules\**"/>
     </ItemGroup>
-    
+
     <Target Name="NpmInstall" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug' And !Exists('$(ClientRoot)node_modules')">
         <Exec Command="node --version" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>

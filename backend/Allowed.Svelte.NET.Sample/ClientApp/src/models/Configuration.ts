@@ -1,3 +1,3 @@
-export class Configuration {
-    apiConnection: string = '';
+﻿export class Configuration {
+    myData: string = '';
 }

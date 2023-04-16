@@ -3,11 +3,9 @@
     import {onMount} from "svelte";
     import {PageTitle} from "svelte-dotnet";
     import type {AboutDto} from "../models/AboutDto";
-    import type {AppServerData} from "../models/AppServerData";
 
-    $: data = <AppServerData>$page.data;
-    $: model = <AboutDto>data.model;
-
+    $: data = <AboutDto>$page.data.model;
+    
     onMount(async () => {
         await page.updateIsEmpty();
     });
@@ -17,9 +15,16 @@
 
 <main>
     <h1>About</h1>
-    <p>{model.text}</p>
-    <p>{data.configuration.apiConnection}</p>
+
+    {#if data && data.text}
+        <p>{data.text}</p>
+    {/if}
+    
     <p>
         <a href="/">Go to index</a>
     </p>
 </main>
+
+<style>
+    
+</style>
