@@ -27,6 +27,10 @@
                 <i class="fas fa-sign-in fa-fw me-3"></i>
                 <span>Sign in</span>
             </NavLink>
+            <NavLink path="/404" nav="{nav}">
+                <i class="fas fa-eye fa-fw me-3"></i>
+                <span>Not found</span>
+            </NavLink>
         </div>
     </div>
 </nav>
