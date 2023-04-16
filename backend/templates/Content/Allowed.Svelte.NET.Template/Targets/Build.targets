@@ -27,8 +27,8 @@
 
     <Target Name="PublishRunVite" AfterTargets="ComputeFilesToPublish">
         <Exec WorkingDirectory="$(ClientRoot)" Command="npm install"/>
-        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(MSBuildProjectDirectory)/$(PublishDir)/wwwroot/app --emptyOutDir"/>
-        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(MSBuildProjectDirectory)/$(PublishDir)/scripts --ssr src/prerender.ts --emptyOutDir"/>
+        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(MSBuildProjectDirectory)\$(PublishDir)\wwwroot\app --emptyOutDir"/>
+        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(MSBuildProjectDirectory)\$(PublishDir)\scripts --ssr src/prerender.ts --emptyOutDir"/>
     </Target>
 
 </Project>

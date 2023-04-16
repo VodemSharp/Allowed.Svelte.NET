@@ -1,12 +1,12 @@
 # Allowed.Svelte.NET
 
-`Allowed.Svelte.NET` is a framework that provides a bridge between `Svelte` and `ASP.NET Core` to build fast and
-efficient web applications with a routing system for communication between front-end and server.
+Allowed.Svelte.NET is a framework that provides a bridge between Svelte and ASP.NET Core to build fast and
+efficient web applications.
 
-The framework was inspired by both `Blazor` and `Svelte`. While `Blazor` is a great platform for front-end development,
-both of its models - `Blazor WebAssembly` and `Blazor Server` - have some critical disadvantages that cannot be resolved
-in the near future. On the other hand, `Svelte` offers a [similar syntax](#comparison-of-blazor-and-svelte) to Blazor and is a great way for `.NET`
-developers with experience in `Razor` syntax to create great web apps.
+> The framework was inspired by Blazor and Svelte. While Blazor is a great platform for front-end development, both
+> of its models - Blazor WebAssembly and Blazor Server - have some critical disadvantages that cannot be resolved
+> in the near future. On the other hand, Svelte offers a [similar syntax](#comparison-of-blazor-and-svelte) to Blazor
+> and is a great way for .NET developers with experience in Razor syntax to create great web apps.
 
 # Table of Contents
 
@@ -33,14 +33,14 @@ developers with experience in `Razor` syntax to create great web apps.
 
 ## Pre-render
 
-Key feature of `Allowed.Svelte.NET` is its ability to prerender pages from .NET using Svelte. This means that pages are
+Key feature of Allowed.Svelte.NET is its ability to prerender pages from .NET using Svelte. This means that pages are
 generated on the server-side before being sent to the client, resulting in faster load times and a smoother user
 experience. Additionally, this approach can improve search engine optimization (SEO), as search engines are better able
 to index prerendered pages.
 
 ## Routing
 
-`Allowed.Svelte.NET` includes a routing system that generates a route map based on `[HttpGet]` attributes. This approach
+Allowed.Svelte.NET includes a routing system that generates a route map based on `[HttpGet]` attributes. This approach
 is similar to that used in Blazor, making it easy for developers to create dynamic and responsive web applications. It
 fully represents the route map to the frontend, so there is no need to duplicate client-side routing logic.
 
@@ -98,10 +98,10 @@ In the client-side code, the parameter can be accessed using `export let section
 
 ## Server side data
 
-To transfer data from the server (`ASP.NET Core`) to the client (`Svelte`), you can use the IServerSideData interface
+To transfer data from the server (ASP.NET Core) to the client (Svelte), you can use the IServerSideData interface
 and implement the `Get` method to retrieve the data from the server.
 
-Here's an example implementation using the ConfigurationData class:
+Here's an example implementation using the `ConfigurationData` class:
 
 ```csharp
 public class ConfigurationData<T> : IServerSideData
@@ -123,17 +123,17 @@ public class ConfigurationData<T> : IServerSideData
 }
 ```
 
-To add the ConfigurationData implementation to the DI container in ASP.NET Core, use the AddServerSideData extension
+To add the `ConfigurationData` implementation to the DI container in ASP.NET Core, use the `AddServerSideData` extension
 method provided by the Allowed.Svelte.NET framework:
 
 ```csharp
 builder.Services.AddServerSideData(new ConfigurationData<T>("sectionName"));
 ```
 
-Here, T is the type of data you want to transfer, and `sectionName` is the name of the configuration section where the
+Here, `T` is the type of data you want to transfer, and `sectionName` is the name of the configuration section where the
 data is located.
 
-Here is an example of accessing transferred data in `Svelte`:
+Here is an example of accessing transferred data in Svelte:
 
 ```sveltehtml
 
@@ -165,7 +165,7 @@ and [RouteStore](#routeStore).
 
 ### UrlStore
 
-The `UrlStore` is a `Svelte` store that extends the `Readable` store, which provides a subscribe method to observe
+The `UrlStore` is a Svelte store that extends the `Readable` store, which provides a subscribe method to observe
 changes to the URL. The `UrlStore` also provides a navigate method to navigate without a reload from JavaScript.
 Here is the `UrlStore` interface:
 
@@ -232,9 +232,9 @@ export class PageStoreData {
 
 The `PageStoreData` class defines the shape of the data stored in the `PageStore`. It includes the following properties:
 
-* isSSR: a boolean value indicating whether the page was rendered on the server-side.
-* href: a string containing the current URL.
-* data: an instance of the ServerData class containing the data model passed from the server.
+* `isSSR`: a boolean value indicating whether the page was rendered on the server-side.
+* `href`: a string containing the current URL.
+* `data`: an instance of the ServerData class containing the data model passed from the server.
 
 ---
 
@@ -247,7 +247,7 @@ export class ServerData {
 The ServerData class defines the shape of the server-side data passed to the PageStore. It includes the following
 property:
 
-* model: an optional object containing the data model.
+* `model`: an optional object containing the data model.
 * any other data parameters, that implemented `IServerSideData` [interface](#server-side-data).
 
 ---
@@ -280,13 +280,13 @@ class RouteStoreData {
 The `RouteStoreData` class is a store that defines the current page by storing information about the route and path. It
 has two properties:
 
-* path: a string that represents the route template for the current page.
-* route: a RouteData object that contains information about the current route.
+* `path`: a string that represents the route template for the current page.
+* `route`: a `RouteData` object that contains information about the current route.
 
-The RouteData class contains two properties:
+The `RouteData` class contains two properties:
 
-* component: an object that represents the Svelte component for the current page.
-* layout: an object that represents the Svelte layout component for the current page.
+* `component`: an object that represents the Svelte component for the current page.
+* `layout`: an object that represents the Svelte layout component for the current page.
 
 ## Router
 
@@ -311,8 +311,8 @@ The RouteData class contains two properties:
 </Router>
 ```
 
-The `Router` component is a `Svelte` component that allows for declarative routing. It provides a way to map URLs
-to `Svelte` components and layouts.
+The `Router` component is a Svelte component that allows for declarative routing. It provides a way to map URLs
+to Svelte components and layouts.
 
 The component takes a [route](#routestore) prop and [url](#urlstore) prop.
 
@@ -328,7 +328,7 @@ Inner components:
 * the `PageTitle` component is used to set the document title for the current page.
 
 Overall, the `Router` component provides a convenient way to handle routing in Svelte applications, similar to
-the `Blazor` router.
+the Blazor router.
 
 ### Layouts
 
@@ -374,11 +374,12 @@ Blazor:
 Svelte:
 
 ```sveltehtml
+
 <script>
     let count = 0;
 
     function handleClick() {
-      count += 1;
+        count += 1;
     }
 </script>
 
@@ -389,7 +390,8 @@ Svelte:
 
 ## Operators
 
->We used conditional logic in the view part only as an example. It's generally better to divide the logic in the if block into the script or code-behind for better maintainability and readability.
+> We used conditional logic in the view part only as an example. It's generally better to divide the logic in the if
+> block into the script or code-behind for better maintainability and readability.
 
 Blazor:
 
@@ -412,6 +414,7 @@ Blazor:
 Svelte:
 
 ```sveltehtml
+
 <script>
     let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 </script>
