@@ -91,6 +91,9 @@ export class RouterService {
     getActivePage(routes: string[][], pathname: string) {
         const route = pathname.split('/');
 
+        if(route.length > 2 && pathname.endsWith('/'))
+            route.pop();
+
         let result = this.getSuitableByLength(routes, route);
         result = this.getSuitableByContent(result, route);
 

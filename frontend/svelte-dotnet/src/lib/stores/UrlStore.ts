@@ -1,6 +1,8 @@
 import {derived, writable} from 'svelte/store'
 import type {Readable} from "svelte/store";
 
+const absoluteRegex = new RegExp('^(?:[a-z+]+:)?//', 'i');
+
 export interface UrlStore extends Readable<URL> {
     navigate?: { (url: string): void };
 }
@@ -35,7 +37,10 @@ export function createUrlStore(ssrUrl: string): UrlStore {
     return {
         subscribe: derived(href, ($href) => new URL($href)).subscribe,
         navigate: function (url: string) {
-            history.pushState({}, '', url);
+            if (absoluteRegex.test(url) && new URL(url).host != window.location.host)
+                window.location.href = url;
+            else
+                history.pushState({}, '', url);
         }
     };
 }

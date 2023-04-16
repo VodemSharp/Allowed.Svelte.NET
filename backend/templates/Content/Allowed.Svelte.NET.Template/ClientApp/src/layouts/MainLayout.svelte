@@ -1,29 +1,27 @@
 ﻿<script>
-    import {fireImg, rocketImg} from "../assets/img";
-    import Header from "../components/shared/Header.svelte";
+    import Sidebar from "../lib/shared/Sidebar.svelte";
+    import Navbar from "../lib/shared/Navbar.svelte";
 </script>
 
-<div class="wrapper">
-    
-    <div class="wrapper__bg">
-        <div id='stars'></div>
-        <div id='stars2'></div>
-        <div id='stars3'></div>
-    </div>
-    
-    <div class="wrapper__rocket">
-        <div class="rocket">
-            <div class="rocket__main">
-                <img src={rocketImg} alt="">
-            </div>
-            <div class="rocket__fire">
-                <img src={fireImg} alt="">
-            </div>
-        </div>
-    </div>
-    
-    <div class="wrapper__content">
-        <Header/>
+<header>
+    <Sidebar/>
+    <Navbar/>
+</header>
+
+<main style="margin-top: 58px">
+    <div class="container pt-4">
         <slot/>
     </div>
-</div>
+</main>
+
+<style>
+    @media (min-width: 991.98px) {
+        main {
+            padding-left: 240px;
+        }
+    }
+
+    :global body {
+        background-color: #fbfbfb!important;
+    }
+</style>

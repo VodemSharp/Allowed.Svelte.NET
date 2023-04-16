@@ -34,7 +34,7 @@ export function createPageStore(ssrData: ServerData, url: UrlStore): PageStore {
     url.subscribe(x => {
         update(p => {
             if (p.href && p.href != x.href) {
-                p.data.model = {};
+                p.data.model = undefined;
             }
 
             p.href = x.href;
@@ -43,7 +43,7 @@ export function createPageStore(ssrData: ServerData, url: UrlStore): PageStore {
     });
 
     const isDataModelEmpty = () => {
-        return Object.keys(page.data.model).length == 0;
+        return !page.data.model;
     };
 
     const updateDataModel = async (init: RequestInit = defaultRequestInit) => {

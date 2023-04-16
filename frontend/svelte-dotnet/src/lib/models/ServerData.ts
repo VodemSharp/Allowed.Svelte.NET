@@ -1,3 +1,3 @@
 export class ServerData {
-    model: object = {};
+    model: object | undefined;
 }

@@ -29,7 +29,7 @@ public class SvelteView : IActionResult
         foreach (var item in collection.DataItems)
         {
             var data = await item.Get(context.HttpContext);
-            
+
             if (data != null)
                 ssrDictionary[item.Section] = data;
         }
@@ -71,9 +71,11 @@ public class SvelteView : IActionResult
 
     protected async Task<string> GetStateResponseText(ActionContext context)
     {
-        var result = await GetResponseText(context);
+        var serializedData = await GetSerializedData(context);
+        var result = await GetResponseText(context, serializedData);
+        
         return result.Replace("%svelte.state%",
-            $"<script>window.SVELTE_DOT_NET_STATE = {await GetSerializedData(context)}</script>");
+            $"<script>window.SVELTE_DOT_NET_STATE = {serializedData}</script>");
     }
 
     protected static Task ProcessResponseData(ActionContext context)

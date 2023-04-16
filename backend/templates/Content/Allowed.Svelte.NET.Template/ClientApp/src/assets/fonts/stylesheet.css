@@ -1,9 +1,0 @@
-@font-face {
-    font-family: "Press Start 2P";
-    src: url("PressStart2P-Regular.eot");
-    src: local("Press Start 2P Regular"), local("PressStart2P-Regular"),
-        url("PressStart2P-Regular.eot?#iefix") format("embedded-opentype"),
-        url("PressStart2P-Regular.woff") format("woff"), url("PressStart2P-Regular.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}

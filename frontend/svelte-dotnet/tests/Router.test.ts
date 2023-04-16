@@ -34,6 +34,7 @@ describe('RouterService', () => {
 
     it('parametrized', () => {
         assert.equal(getActivePage('/users'), '/users');
+        assert.equal(getActivePage('/users/'), '/users');
         assert.equal(getActivePage('/users/1'), '/users/{id}');
         assert.equal(getActivePage('/orders'), '/orders/{id?}');
         assert.equal(getActivePage('/orders/1'), '/orders/{id?}');

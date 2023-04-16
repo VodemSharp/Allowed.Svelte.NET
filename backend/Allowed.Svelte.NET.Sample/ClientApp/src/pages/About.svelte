@@ -17,8 +17,8 @@
 
 <main>
     <h1>About</h1>
-    <p>{model?.text}</p>
-    <p>{data.configuration?.apiConnection}</p>
+    <p>{model.text}</p>
+    <p>{data.configuration.apiConnection}</p>
     <p>
         <a href="/">Go to index</a>
     </p>

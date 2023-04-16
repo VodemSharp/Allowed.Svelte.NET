@@ -1,4 +1,5 @@
 using Allowed.Svelte.NET;
+using Allowed.Svelte.NET.Template.Data;
 using Jering.Javascript.NodeJS;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddNodeJS();
 builder.Services.AddSvelte();
+
+builder.Services.AddSingleton<WeatherForecastService>();
 
 var app = builder.Build();
 

@@ -1,19 +1,17 @@
 <script lang="ts">
-  import {Router, RouteView, PageTitle, LayoutView} from "svelte-dotnet";
-  import {url, route} from "./stores/RouterStores";
-  import MainLayout from "./layouts/MainLayout.svelte";
-  import "./assets/scss/style.scss";
-  import "./assets/fonts/stylesheet.css";
+    import {Router, RouteView, PageTitle, LayoutView} from "svelte-dotnet";
+    import {url, route} from "./stores/RouterStores";
+    import MainLayout from "./layouts/MainLayout.svelte";
 </script>
 
 <Router route="{$route}">
-  <div slot="found">
-    <RouteView route="{$route}" url="{$url}" defaultLayout="{MainLayout}"/>
-  </div>
-  <div slot="not-found">
-    <PageTitle value="Not found"/>
-    <LayoutView layout="{MainLayout}">
-      <p role="alert">Sorry, there's nothing at this address.</p>
-    </LayoutView>
-  </div>
+    <div slot="found">
+        <RouteView route="{$route}" url="{$url}" defaultLayout="{MainLayout}"/>
+    </div>
+    <div slot="not-found">
+        <PageTitle value="Not found"/>
+        <LayoutView layout="{MainLayout}">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </div>
 </Router>

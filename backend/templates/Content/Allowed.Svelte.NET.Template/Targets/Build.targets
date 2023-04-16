@@ -1,17 +1,17 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    
+
     <PropertyGroup>
         <ClientRoot>ClientApp\</ClientRoot>
         <DefaultItemExcludes>$(DefaultItemExcludes);$(ClientRoot)node_modules\**</DefaultItemExcludes>
         <ViteRoute>node_modules\.bin\vite</ViteRoute>
     </PropertyGroup>
-    
+
     <ItemGroup>
         <Content Remove="$(ClientRoot)**"/>
         <None Remove="$(ClientRoot)**"/>
         <None Include="$(ClientRoot)**" Exclude="$(ClientRoot)node_modules\**"/>
     </ItemGroup>
-    
+
     <Target Name="NpmInstall" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug' And !Exists('$(ClientRoot)node_modules')">
         <Exec Command="node --version" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
@@ -27,8 +27,8 @@
 
     <Target Name="PublishRunVite" AfterTargets="ComputeFilesToPublish">
         <Exec WorkingDirectory="$(ClientRoot)" Command="npm install"/>
-        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(PublishDir)/wwwroot/app --emptyOutDir"/>
-        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(PublishDir)/scripts --ssr src/prerender.ts --emptyOutDir"/>
+        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(MSBuildProjectDirectory)/$(PublishDir)/wwwroot/app --emptyOutDir"/>
+        <Exec WorkingDirectory="$(ClientRoot)" Command="$(ViteRoute) build --outDir $(MSBuildProjectDirectory)/$(PublishDir)/scripts --ssr src/prerender.ts --emptyOutDir"/>
     </Target>
 
 </Project>

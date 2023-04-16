@@ -45,7 +45,7 @@ public static class RouterService
         var routesBuilder = new StringBuilder();
         var resultBuilder = new StringBuilder();
 
-        var methods = options.Assemblies.Select(Assembly.LoadFile)
+        var methods = options.Assemblies.Select(Assembly.LoadFrom)
             .SelectMany(x => x.GetTypes())
             .Where(x => x.IsClass)
             .SelectMany(t => t.GetMethods())
