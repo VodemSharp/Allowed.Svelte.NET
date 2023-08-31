@@ -1,5 +1,5 @@
-﻿export let mdb;
+﻿export let mdb: any;
 
-export function setMdb(newMdb) {
+export function setMdb(newMdb: any) {
     mdb = newMdb;
 }

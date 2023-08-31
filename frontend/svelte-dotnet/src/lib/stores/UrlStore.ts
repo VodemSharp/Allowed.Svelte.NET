@@ -1,16 +1,17 @@
-import {derived, writable} from 'svelte/store'
-import type {Readable} from "svelte/store";
+import { derived, writable } from 'svelte/store'
+import type { Readable } from "svelte/store";
 
 const absoluteRegex = new RegExp('^(?:[a-z+]+:)?//', 'i');
 
 export interface UrlStore extends Readable<URL> {
-    navigate?: { (url: string): void };
+    navigate: { (url: string): void };
 }
 
 export function createUrlStore(ssrUrl: string): UrlStore {
     if (typeof window === 'undefined') {
         return {
-            subscribe: writable(new URL(ssrUrl)).subscribe
+            subscribe: writable(new URL(ssrUrl)).subscribe,
+            navigate: (_: string) => { throw new Error("Function 'navigate' is not available in SSR mode.") }
         };
     }
 

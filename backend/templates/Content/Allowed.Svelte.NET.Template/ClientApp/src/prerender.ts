@@ -1,9 +1,8 @@
-﻿import type {create_ssr_component} from 'svelte/internal';
-import App from "./App.svelte";
-import {createStores} from "./stores/RouterStores";
-import type {ServerData} from "svelte-dotnet";
+﻿import App from "./App.svelte";
+import { createStores } from "./stores/RouterStores";
+import type { ServerData } from "svelte-dotnet";
 
-type ServerSideComponent = ReturnType<typeof create_ssr_component>;
+type ServerSideComponent = { render: () => {} };
 const ServerApp = <unknown>App as ServerSideComponent;
 
 export async function render(url: string, props: ServerData) {

@@ -55,7 +55,7 @@ dotnet tool update -g Allowed.Svelte.NET.Tools --version 1.0.2
 2. Install Allowed.Svelte.NET.Templates:
 
 ```
-dotnet new install Allowed.Svelte.NET.Templates::1.0.2
+dotnet new install Allowed.Svelte.NET.Templates::1.0.3
 ```
 
 3. Create a project (You can also create project using Visual Studio, Rider, etc.):

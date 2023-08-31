@@ -8,7 +8,7 @@
         <RepositoryUrl>https://github.com/VodemSharp/Allowed.Svelte.NET</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageIcon>icon.png</PackageIcon>
-        <PackageVersion>1.0.6</PackageVersion>
+        <PackageVersion>1.0.7</PackageVersion>
         <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     </PropertyGroup>
 
@@ -26,5 +26,8 @@
     <ItemGroup>
         <PackageReference Include="Jering.Javascript.NodeJS" Version="6.3.1" />
     </ItemGroup>
+
+
+
 
 </Project>

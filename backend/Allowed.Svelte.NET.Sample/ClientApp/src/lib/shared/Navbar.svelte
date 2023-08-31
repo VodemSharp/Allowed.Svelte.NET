@@ -12,7 +12,7 @@
             <i class="fas fa-bars"></i>
         </button>
 
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             Allowed.Svelte.NET.Sample
         </a>
 

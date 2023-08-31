@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
     import {onMount} from "svelte";
     import {mdb} from "../client/Variables";
     import {url} from "../stores/RouterStores";
     import {PageTitle} from "svelte-dotnet";
 
-    let emailInput;
-    let passwordInput;
+    let emailInput: HTMLElement;
+    let passwordInput: HTMLElement;
 
     onMount(() => {
         new mdb.Input(emailInput).init();

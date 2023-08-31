@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Allowed.Svelte.NET.Exceptions;
 using Allowed.Svelte.NET.Models;
 using Allowed.Svelte.NET.ServerSide;
 using Jering.Javascript.NodeJS;
@@ -47,8 +48,12 @@ public class SvelteView : IActionResult
         var environment = context.HttpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
         var nodeJsService = context.HttpContext.RequestServices.GetRequiredService<INodeJSService>();
 
-        var temp = (await File.ReadAllTextAsync(
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scripts", "prerender.js"))).Split("export");
+        var prerenderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scripts", "prerender.js");
+
+        if (!File.Exists(prerenderPath))
+            throw new BuildingException();
+
+        var temp = (await File.ReadAllTextAsync(prerenderPath)).Split("export");
         var serverRender = string.Join("export", temp.Take(temp.Length - 1));
 
         var request = context.HttpContext.Request;
@@ -61,9 +66,14 @@ public class SvelteView : IActionResult
         var renderedData = await nodeJsService.InvokeFromStringAsync<RenderedData>(javascriptModule);
 
         if (renderedData == null)
-            return "Error"; // TODO
+            throw new RenderingException();
 
-        return (await File.ReadAllTextAsync(Path.Combine(environment.WebRootPath, "app/index.html")))
+        var appPath = Path.Combine(environment.WebRootPath, "app/index.html");
+        
+        if (!File.Exists(appPath))
+            throw new BuildingException();
+        
+        return (await File.ReadAllTextAsync(appPath))
             .Replace("%svelte.body%", renderedData.HTML)
             .Replace("%svelte.head%", renderedData.Head)
             .Replace("%svelte.css%", $"<style>{renderedData.CSS.Code}</style>");
@@ -73,7 +83,7 @@ public class SvelteView : IActionResult
     {
         var serializedData = await GetSerializedData(context);
         var result = await GetResponseText(context, serializedData);
-        
+
         return result.Replace("%svelte.state%",
             $"<script>window.SVELTE_DOT_NET_STATE = {serializedData}</script>");
     }
@@ -100,7 +110,19 @@ public class SvelteView : IActionResult
         }
 
         await ProcessResponseData(context);
-        await context.HttpContext.Response.WriteAsync(await GetStateResponseText(context));
+
+        try
+        {
+            await context.HttpContext.Response.WriteAsync(await GetStateResponseText(context));
+        }
+        catch (BuildingException)
+        {
+            await context.HttpContext.Response.WriteAsync("Build is not yet complete!");
+        }
+        catch (RenderingException)
+        {
+            context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        }
     }
 }
 

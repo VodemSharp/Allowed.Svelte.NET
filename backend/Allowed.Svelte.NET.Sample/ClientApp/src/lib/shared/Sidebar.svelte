@@ -52,18 +52,4 @@
             width: 100%;
         }
     }
-
-    .sidebar .active {
-        border-radius: 5px;
-        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-    }
-
-    .sidebar-sticky {
-        position: relative;
-        top: 0;
-        height: calc(100vh - 48px);
-        padding-top: 0.5rem;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
 </style>

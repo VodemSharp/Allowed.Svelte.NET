@@ -9,7 +9,7 @@
     <Import Project="Targets/Build.targets" />
 
     <ItemGroup>
-        <PackageReference Include="Allowed.Svelte.NET" Version="1.0.6" />
+        <PackageReference Include="Allowed.Svelte.NET" Version="1.0.7" />
     </ItemGroup>
 
     <ItemGroup>

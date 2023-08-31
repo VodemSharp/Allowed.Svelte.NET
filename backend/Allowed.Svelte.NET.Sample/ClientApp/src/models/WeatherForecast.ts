@@ -1,6 +1,6 @@
 ﻿export class WeatherForecast {
-    public date: string;
-    public temperatureC: number;
-    public temperatureF: number;
-    public summary: string;
+    date: string = '';
+    temperatureC: number = 0;
+    temperatureF: number = 0;
+    summary: string = '';
 }

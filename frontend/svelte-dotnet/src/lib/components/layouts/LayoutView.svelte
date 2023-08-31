@@ -1,5 +1,7 @@
 <script lang="ts">
-    export let layout;
+    import type { ComponentType } from "svelte";
+
+    export let layout: ComponentType;
 </script>
 
 <svelte:component this="{layout}">

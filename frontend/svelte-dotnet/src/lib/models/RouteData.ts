@@ -1,8 +1,10 @@
-export class RouteData {
-    component: object | undefined;
-    layout: object | undefined;
+import type { ComponentType } from "svelte";
 
-    public constructor(component: object | undefined, layout: object | undefined = undefined) {
+export class RouteData {
+    component: ComponentType  | undefined;
+    layout: ComponentType  | undefined;
+
+    public constructor(component: ComponentType  | undefined, layout: ComponentType  | undefined = undefined) {
         this.component = component;
         this.layout = layout;
     }

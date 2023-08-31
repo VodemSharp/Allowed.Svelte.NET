@@ -4,7 +4,7 @@
     import {WeatherForecast} from "../models/WeatherForecast";
     import {onMount} from "svelte";
 
-    $: forecasts = <WeatherForecast>$page.data.model;
+    $: forecasts = <WeatherForecast[]>$page.data.model;
 
     onMount(async () => {
         await page.updateIsEmpty();

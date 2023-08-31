@@ -9,10 +9,6 @@
     <Import Project="Targets/Build.targets" />
 
     <ItemGroup>
-        <PackageReference Include="Allowed.Svelte.NET" Version="1.0.6" />
-    </ItemGroup>
-
-    <ItemGroup>
         <Folder Include="ClientApp\public" />
         <Folder Include="wwwroot" />
     </ItemGroup>
@@ -32,6 +28,10 @@
         <_ContentIncludedByDefault Remove="wwwroot\app\assets\index.42be7f31.js" />
         <_ContentIncludedByDefault Remove="wwwroot\app\index.html" />
         <_ContentIncludedByDefault Remove="wwwroot\app\logo.svg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Allowed.Svelte.NET\Allowed.Svelte.NET.csproj" />
     </ItemGroup>
 
 </Project>
